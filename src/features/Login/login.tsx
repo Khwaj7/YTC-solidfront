@@ -1,6 +1,4 @@
-import {useLogin} from "~/features/Login/useLogin";
-import {createSignal, Resource, Setter} from "solid-js";
-import {IUser} from "~/models/IUser";
+import {createSignal, Setter} from "solid-js";
 
 interface IParams {
     setApiKey: Setter<string | undefined>;
