@@ -1,6 +1,8 @@
+import Dashboard from "../Dashboard/dashboard";
+
 export const Home = () => {
 
     return (
-        <span>test</span>
+        <Dashboard></Dashboard>
     );
 }
