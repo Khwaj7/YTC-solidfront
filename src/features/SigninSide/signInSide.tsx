@@ -1,4 +1,3 @@
-import * as React from 'react';
 import Avatar from '@suid/material/Avatar';
 import Button from '@suid/material/Button';
 import CssBaseline from '@suid/material/CssBaseline';
@@ -35,7 +34,7 @@ function Copyright(props: any) {
 }
 
 export default function SignInSide(props: IProps) {
-    const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    const handleSubmit = (event: HTMLFormElement) => {
         event.preventDefault();
         const data = new FormData(event.currentTarget);
         console.log({
@@ -77,7 +76,7 @@ export default function SignInSide(props: IProps) {
                     <Typography component="h1" variant="h5">
                         Sign in
                     </Typography>
-                    <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 1 }}>
+                    <Box component="form" noValidate onsubmit={handleSubmit} sx={{ mt: 1 }}>
                         <TextField
                             margin="normal"
                             required
