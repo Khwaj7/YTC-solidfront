@@ -1,23 +1,20 @@
 {
-  "name": "example-bare",
-  "type": "module",
+  "name": "YTC_suid_solidjs",
+  "version": "0.0.0",
+  "private": true,
   "scripts": {
-    "dev": "vinxi dev",
-    "build": "vinxi build",
-    "start": "vinxi start"
+    "build": "vite build",
+    "start": "vite"
   },
   "dependencies": {
-    "@solidjs/start": "^0.7.5",
-    "@suid/icons-material": "^0.6.11",
-    "@suid/material": "^0.15.1",
-    "@suid/vite-plugin": "^0.1.5",
-    "solid-js": "^1.8.15",
-    "typescript": "^5.4.2",
-    "vinxi": "^0.3.10",
-    "vite": "^5.1.6",
-    "vite-plugin-solid": "^2.10.2"
+    "@suid/material": "*",
+    "@suid/icons-material": "*",
+    "solid-js": "*"
   },
-  "engines": {
-    "node": ">=18"
+  "devDependencies": {
+    "@suid/vite-plugin": "*",
+    "typescript": "^4.8.2",
+    "vite": "*",
+    "vite-plugin-solid": "*"
   }
 }
