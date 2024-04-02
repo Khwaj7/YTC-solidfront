@@ -1,5 +1,5 @@
 import {createSignal, Setter} from "solid-js";
-import {mapUserResponseUser} from "~/models/mappers/mapUserResponseUser";
+import { mapUserResponseUser } from "../../models/mappers/mapUserResponseUser";
 
 export const useLogin = () => {
     const [apiKey, setApiKey] = createSignal('');
