@@ -1,9 +1,13 @@
-import Channel from "../Channel/channel";
-import { ChannelCard } from "../Channel/components/ChannelCard";
+import { Resource } from "solid-js";
+import { IUser } from "../../modules/models/IUser";
+import Dashboard from "../Dashboard/dashboard";
 
-export const Home = () => {
+interface IParams {
+    user: Resource<IUser>;
+}
 
+export const Home = (props: IParams) => {
     return (
-        <Channel apiKey="QDuebCUy0G5U-oNCJX9lSTXbnxncDENUP66gY0_r7Le3lw4lW-9Y5n_vxQxNxWE8" userId={7}></Channel>
+        <Dashboard user={props.user}></Dashboard>
     );
 }

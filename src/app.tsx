@@ -1,7 +1,6 @@
-import Button from "@suid/material/Button";
 import './app.css'
 import { Match, Switch, createEffect, createResource, createSignal } from "solid-js";
-import { mapUserResponseUser } from "./models/mappers/mapUserResponseUser";
+import { mapUserResponseUser } from "./modules/models/mappers/mapUserResponseUser";
 import Login from "./features/Login/login";
 import { Home } from "./features/Home/home";
 import { ThemeProvider, createTheme } from "@suid/material";
@@ -30,7 +29,7 @@ export default function App() {
         </Match>
         <Match when={user()}>
           <div>user: {JSON.stringify(user())}</div>
-          <Home></Home>
+          <Home user={user}></Home>
         </Match>
       </Switch>
     </ThemeProvider>

@@ -1,4 +1,5 @@
-import {IUser, IUserResponse} from "~/models/IUser";
+import { IUser, IUserResponse } from "../IUser";
+
 
 export const mapUserResponseUser = (userResponse: IUserResponse): IUser => {
   return {

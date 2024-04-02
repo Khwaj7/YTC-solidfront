@@ -10,6 +10,7 @@ import Box from '@suid/material/Box';
 import Grid from '@suid/material/Grid';
 import LockOutlinedIcon from '@suid/icons-material/LockOutlined';
 import Typography from '@suid/material/Typography';
+import { createTheme, ThemeProvider } from '@suid/material/styles';
 import { Setter } from 'solid-js';
 
 interface IProps {
@@ -22,7 +23,7 @@ function Copyright(props: any) {
             {'Copyright © '}
             <Link color="inherit" href="#">
                 YTC
-            </Link>{' '}
+            </Link> - ALPHA {' '}
             {new Date().getFullYear()}
             {'.'}
             <br/>Built with 🫶🏼 from France 🇫🇷
@@ -75,7 +76,7 @@ export default function SignInSide(props: IProps) {
                     <Typography component="h1" variant="h5">
                         Sign in
                     </Typography>
-                    <Box component="form" noValidate onsubmit={handleSubmit} sx={{ mt: 1 }}>
+                    <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 1 }}>
                         <TextField
                             margin="normal"
                             required
