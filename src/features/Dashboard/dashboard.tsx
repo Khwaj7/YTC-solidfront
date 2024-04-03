@@ -120,6 +120,8 @@ export default function Dashboard(props: IParams) {
                   }}
                 >
                   <span>At A Glance</span>
+                  <Box>
+                  </Box>
                 </Paper>
               </Grid>
               {/* Recent Deposits */}
@@ -156,7 +158,7 @@ export default function Dashboard(props: IParams) {
                             <TableRow>
                               <TableCell>{comment.commenter}</TableCell>
                               <TableCell>{comment.date}</TableCell>
-                              <TableCell><Chip color='warning' label='feedback'/></TableCell>
+                              <TableCell><Chip color='warning' label='feedback' /></TableCell>
                               <TableCell>{comment.comment}</TableCell>
                               <TableCell align='right'>
                                 <ButtonGroup orientation='vertical' variant="outlined" size='small'>
