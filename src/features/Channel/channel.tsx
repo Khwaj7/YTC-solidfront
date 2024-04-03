@@ -1,25 +1,22 @@
-import { For } from "solid-js";
-import { useChannel } from "./useChannel";
-import { ChannelCard } from "./components/ChannelCard";
+import {useChannel} from "~/features/Channel/useChannel";
 
 interface IParams {
-    apiKey: string;
     userId: number;
 }
 
 export default (props: IParams) => {
     const {
         channels,
-        getChannelsByUserId
-    } = useChannel({ apiKey: props.apiKey, userId: props.userId });
+        fetchChannels
+    } = useChannel();
+
+    fetchChannels(props.userId).then(
+        () => console.log(channels)
+    );
 
     return (
         <>
-            <span>{JSON.stringify(channels())}</span>
-            <For each={channels()} fallback={<div>Loading...</div>}>
-                {(item) => <ChannelCard channel={item}></ChannelCard>}
-            </For>
+            <h2>Your channels</h2>
         </>
-
     )
 }
