@@ -21,6 +21,7 @@ import { For, Resource, createSignal } from 'solid-js';
 import { IUser } from '../../modules/models/IUser';
 import { IComment } from '../../modules/models/IComment';
 import { Button, ButtonGroup, Chip, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@suid/material';
+import { Chart1 } from './Charts/chart1';
 
 interface IParams {
   user: Resource<IUser>;
@@ -116,11 +117,13 @@ export default function Dashboard(props: IParams) {
                     p: 2,
                     display: 'flex',
                     flexDirection: 'column',
-                    height: 240,
+                    height: 450
                   }}
                 >
                   <span>At A Glance</span>
                   <Box>
+                    <h3>Comments distribution</h3>
+                    <Chart1 />
                   </Box>
                 </Paper>
               </Grid>
