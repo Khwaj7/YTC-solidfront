@@ -1,8 +1,6 @@
 import { styled, createTheme, ThemeProvider } from '@suid/material/styles';
 import CssBaseline from '@suid/material/CssBaseline';
-import MuiDrawer from '@suid/material/Drawer';
 import Box from '@suid/material/Box';
-import MuiAppBar, { AppBarProps as MuiAppBarProps } from '@suid/material/AppBar';
 import Toolbar from '@suid/material/Toolbar';
 import List from '@suid/material/List';
 import Typography from '@suid/material/Typography';
@@ -22,12 +20,16 @@ import { IUser } from '../../modules/models/IUser';
 import { IComment } from '../../modules/models/IComment';
 import { Button, ButtonGroup, Chip, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@suid/material';
 import { Chart1 } from './Charts/chart1';
+import { Copyright } from '../../components/Copyright/copyright';
+import { AppBar } from '../../components/AppBar/appBar';
+import { Drawer } from '../../components/Drawer/drawer';
 
 interface IParams {
   user: Resource<IUser>;
 }
 // TODO remove, this demo shouldn't need to reset the theme.
 const defaultTheme = createTheme();
+const drawerWidth: number = 240;
 
 export default function Dashboard(props: IParams) {
   const [open, setOpen] = createSignal(true);
@@ -40,7 +42,7 @@ export default function Dashboard(props: IParams) {
     <ThemeProvider theme={defaultTheme}>
       <Box sx={{ display: 'flex' }}>
         <CssBaseline />
-        <AppBar position="absolute" open={open}>
+        <AppBar position="absolute" open={open} drawerWidth={drawerWidth}>
           <Toolbar
             sx={{
               pr: '24px', // keep right padding when drawer closed
@@ -74,7 +76,7 @@ export default function Dashboard(props: IParams) {
             </IconButton>
           </Toolbar>
         </AppBar>
-        <Drawer variant="permanent" open={open}>
+        <Drawer variant="permanent" open={open} drawerWidth={drawerWidth}>
           <Toolbar
             sx={{
               display: 'flex',
@@ -186,67 +188,3 @@ export default function Dashboard(props: IParams) {
     </ThemeProvider>
   );
 }
-
-// TODO : MOVE INTO A GLOBAL FUNCTION
-function Copyright(props: any) {
-  return (
-    <Typography variant="body2" color="text.secondary" align="center" {...props}>
-      {'Copyright © '}
-      <Link color="inherit" href="https://mui.com/">
-        YTC
-      </Link> - ALPHA {' '}
-      {new Date().getFullYear()}
-      {'.'}
-    </Typography>
-  );
-}
-
-const drawerWidth: number = 240;
-
-interface AppBarProps extends MuiAppBarProps {
-  open?: boolean;
-}
-
-const AppBar = styled(MuiAppBar, {
-  shouldForwardProp: (prop) => prop !== 'open',
-})<AppBarProps>(({ theme, open }) => ({
-  zIndex: theme.zIndex.drawer + 1,
-  transition: theme.transitions.create(['width', 'margin'], {
-    easing: theme.transitions.easing.sharp,
-    duration: theme.transitions.duration.leavingScreen,
-  }),
-  ...(open && {
-    marginLeft: drawerWidth,
-    width: `calc(100% - ${drawerWidth}px)`,
-    transition: theme.transitions.create(['width', 'margin'], {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.enteringScreen,
-    }),
-  }),
-}));
-
-const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' })(
-  ({ theme, open }) => ({
-    '& .MuiDrawer-paper': {
-      position: 'relative',
-      whiteSpace: 'nowrap',
-      width: drawerWidth,
-      transition: theme.transitions.create('width', {
-        easing: theme.transitions.easing.sharp,
-        duration: theme.transitions.duration.enteringScreen,
-      }),
-      boxSizing: 'border-box',
-      ...(!open && {
-        overflowX: 'hidden',
-        transition: theme.transitions.create('width', {
-          easing: theme.transitions.easing.sharp,
-          duration: theme.transitions.duration.leavingScreen,
-        }),
-        width: theme.spacing(7),
-        [theme.breakpoints.up('sm')]: {
-          width: theme.spacing(9),
-        },
-      }),
-    },
-  }),
-);
