@@ -111,20 +111,20 @@ export default function Dashboard(props: IParams) {
           <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
             <Grid container spacing={3}>
               {/* Chart */}
-              <Grid item xs={12} md={8} lg={9}>
+              <Grid item xs={12} md={2} lg={9}>
                 <Paper
                   sx={{
                     p: 2,
                     display: 'flex',
+                    width: '100%',
                     flexDirection: 'column',
+                    alignItems: 'center',
                     height: 450
                   }}
                 >
                   <span>At A Glance</span>
-                  <Box>
-                    <h3>Comments distribution</h3>
-                    <Chart1 />
-                  </Box>
+                  <h3>Your latest videos</h3>
+                  <Chart1 />
                 </Paper>
               </Grid>
               {/* Recent Deposits */}
