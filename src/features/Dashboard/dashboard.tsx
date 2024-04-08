@@ -10,7 +10,6 @@ import Badge from '@suid/material/Badge';
 import Container from '@suid/material/Container';
 import Grid from '@suid/material/Grid';
 import Paper from '@suid/material/Paper';
-import Link from '@suid/material/Link';
 import MenuIcon from '@suid/icons-material/Menu';
 import ChevronLeftIcon from '@suid/icons-material/ChevronLeft';
 import NotificationsIcon from '@suid/icons-material/Notifications';
@@ -19,10 +18,12 @@ import { For, Resource, createSignal } from 'solid-js';
 import { IUser } from '../../modules/models/IUser';
 import { IComment } from '../../modules/models/IComment';
 import { Button, ButtonGroup, Chip, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@suid/material';
-import { Chart1 } from './Charts/chart1';
+import { Chart1 } from './AtAGlance/chart1';
 import { Copyright } from '../../components/Copyright/copyright';
 import { AppBar } from '../../components/AppBar/appBar';
 import { Drawer } from '../../components/Drawer/drawer';
+import AtAGlance from './AtAGlance/atAGlance';
+import RecentVideos from './recentVideos/recentVideos';
 
 interface IParams {
   user: Resource<IUser>;
@@ -42,7 +43,7 @@ export default function Dashboard(props: IParams) {
     <ThemeProvider theme={defaultTheme}>
       <Box sx={{ display: 'flex' }}>
         <CssBaseline />
-        <AppBar position="absolute" open={open} drawerWidth={drawerWidth}>
+        <AppBar component="div" position="absolute">
           <Toolbar
             sx={{
               pr: '24px', // keep right padding when drawer closed
@@ -112,36 +113,9 @@ export default function Dashboard(props: IParams) {
           Welcome back, {props.user().name}
           <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
             <Grid container spacing={3}>
-              {/* Chart */}
-              <Grid item xs={12} md={2} lg={9}>
-                <Paper
-                  sx={{
-                    p: 2,
-                    display: 'flex',
-                    width: '100%',
-                    flexDirection: 'column',
-                    alignItems: 'center',
-                    height: 450
-                  }}
-                >
-                  <span>At A Glance</span>
-                  <h3>Your latest videos</h3>
-                  <Chart1 />
-                </Paper>
-              </Grid>
-              {/* Recent Deposits */}
-              <Grid item xs={12} md={4} lg={3}>
-                <Paper
-                  sx={{
-                    p: 2,
-                    display: 'flex',
-                    flexDirection: 'column',
-                    height: 240,
-                  }}
-                >
-                  <span>Recent Videos</span>
-                </Paper>
-              </Grid>
+              <AtAGlance />
+
+              <RecentVideos />
               {/* Recent Orders */}
               <Grid item xs={12}>
                 <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column' }}>
