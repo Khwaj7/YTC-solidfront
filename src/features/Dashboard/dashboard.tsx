@@ -1,8 +1,6 @@
 import { styled, createTheme, ThemeProvider } from '@suid/material/styles';
 import CssBaseline from '@suid/material/CssBaseline';
-import MuiDrawer from '@suid/material/Drawer';
 import Box from '@suid/material/Box';
-import MuiAppBar, { AppBarProps as MuiAppBarProps } from '@suid/material/AppBar';
 import Toolbar from '@suid/material/Toolbar';
 import List from '@suid/material/List';
 import Typography from '@suid/material/Typography';
@@ -12,7 +10,6 @@ import Badge from '@suid/material/Badge';
 import Container from '@suid/material/Container';
 import Grid from '@suid/material/Grid';
 import Paper from '@suid/material/Paper';
-import Link from '@suid/material/Link';
 import MenuIcon from '@suid/icons-material/Menu';
 import ChevronLeftIcon from '@suid/icons-material/ChevronLeft';
 import NotificationsIcon from '@suid/icons-material/Notifications';
@@ -21,12 +18,19 @@ import { For, Resource, createSignal } from 'solid-js';
 import { IUser } from '../../modules/models/IUser';
 import { IComment } from '../../modules/models/IComment';
 import { Button, ButtonGroup, Chip, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@suid/material';
+import { Chart1 } from './AtAGlance/chart1';
+import { Copyright } from '../../components/Copyright/copyright';
+import { AppBar } from '../../components/AppBar/appBar';
+import { Drawer } from '../../components/Drawer/drawer';
+import AtAGlance from './AtAGlance/atAGlance';
+import RecentVideos from './recentVideos/recentVideos';
 
 interface IParams {
   user: Resource<IUser>;
 }
 // TODO remove, this demo shouldn't need to reset the theme.
 const defaultTheme = createTheme();
+const drawerWidth: number = 240;
 
 export default function Dashboard(props: IParams) {
   const [open, setOpen] = createSignal(true);
@@ -39,7 +43,7 @@ export default function Dashboard(props: IParams) {
     <ThemeProvider theme={defaultTheme}>
       <Box sx={{ display: 'flex' }}>
         <CssBaseline />
-        <AppBar position="absolute" open={open}>
+        <AppBar component="div" position="absolute">
           <Toolbar
             sx={{
               pr: '24px', // keep right padding when drawer closed
@@ -73,7 +77,7 @@ export default function Dashboard(props: IParams) {
             </IconButton>
           </Toolbar>
         </AppBar>
-        <Drawer variant="permanent" open={open}>
+        <Drawer variant="permanent" open={open} drawerWidth={drawerWidth}>
           <Toolbar
             sx={{
               display: 'flex',
@@ -109,32 +113,9 @@ export default function Dashboard(props: IParams) {
           Welcome back, {props.user().name}
           <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
             <Grid container spacing={3}>
-              {/* Chart */}
-              <Grid item xs={12} md={8} lg={9}>
-                <Paper
-                  sx={{
-                    p: 2,
-                    display: 'flex',
-                    flexDirection: 'column',
-                    height: 240,
-                  }}
-                >
-                  <span>At A Glance</span>
-                </Paper>
-              </Grid>
-              {/* Recent Deposits */}
-              <Grid item xs={12} md={4} lg={3}>
-                <Paper
-                  sx={{
-                    p: 2,
-                    display: 'flex',
-                    flexDirection: 'column',
-                    height: 240,
-                  }}
-                >
-                  <span>Recent Videos</span>
-                </Paper>
-              </Grid>
+              <AtAGlance />
+
+              <RecentVideos />
               {/* Recent Orders */}
               <Grid item xs={12}>
                 <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column' }}>
@@ -156,7 +137,7 @@ export default function Dashboard(props: IParams) {
                             <TableRow>
                               <TableCell>{comment.commenter}</TableCell>
                               <TableCell>{comment.date}</TableCell>
-                              <TableCell><Chip color='warning' label='feedback'/></TableCell>
+                              <TableCell><Chip color='warning' label='feedback' /></TableCell>
                               <TableCell>{comment.comment}</TableCell>
                               <TableCell align='right'>
                                 <ButtonGroup orientation='vertical' variant="outlined" size='small'>
@@ -181,67 +162,3 @@ export default function Dashboard(props: IParams) {
     </ThemeProvider>
   );
 }
-
-// TODO : MOVE INTO A GLOBAL FUNCTION
-function Copyright(props: any) {
-  return (
-    <Typography variant="body2" color="text.secondary" align="center" {...props}>
-      {'Copyright © '}
-      <Link color="inherit" href="https://mui.com/">
-        YTC
-      </Link> - ALPHA {' '}
-      {new Date().getFullYear()}
-      {'.'}
-    </Typography>
-  );
-}
-
-const drawerWidth: number = 240;
-
-interface AppBarProps extends MuiAppBarProps {
-  open?: boolean;
-}
-
-const AppBar = styled(MuiAppBar, {
-  shouldForwardProp: (prop) => prop !== 'open',
-})<AppBarProps>(({ theme, open }) => ({
-  zIndex: theme.zIndex.drawer + 1,
-  transition: theme.transitions.create(['width', 'margin'], {
-    easing: theme.transitions.easing.sharp,
-    duration: theme.transitions.duration.leavingScreen,
-  }),
-  ...(open && {
-    marginLeft: drawerWidth,
-    width: `calc(100% - ${drawerWidth}px)`,
-    transition: theme.transitions.create(['width', 'margin'], {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.enteringScreen,
-    }),
-  }),
-}));
-
-const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' })(
-  ({ theme, open }) => ({
-    '& .MuiDrawer-paper': {
-      position: 'relative',
-      whiteSpace: 'nowrap',
-      width: drawerWidth,
-      transition: theme.transitions.create('width', {
-        easing: theme.transitions.easing.sharp,
-        duration: theme.transitions.duration.enteringScreen,
-      }),
-      boxSizing: 'border-box',
-      ...(!open && {
-        overflowX: 'hidden',
-        transition: theme.transitions.create('width', {
-          easing: theme.transitions.easing.sharp,
-          duration: theme.transitions.duration.leavingScreen,
-        }),
-        width: theme.spacing(7),
-        [theme.breakpoints.up('sm')]: {
-          width: theme.spacing(9),
-        },
-      }),
-    },
-  }),
-);

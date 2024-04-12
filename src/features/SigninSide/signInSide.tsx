@@ -12,25 +12,10 @@ import LockOutlinedIcon from '@suid/icons-material/LockOutlined';
 import Typography from '@suid/material/Typography';
 import { createTheme, ThemeProvider } from '@suid/material/styles';
 import { Setter } from 'solid-js';
+import { Copyright } from '../../components/Copyright/copyright';
 
 interface IProps {
     setFormApiKey: Setter<string>;
-}
-
-function Copyright(props: any) {
-    return (
-        <Typography variant="body2" color="text.secondary" align="center" {...props}>
-            {'Copyright © '}
-            <Link color="inherit" href="#">
-                YTC
-            </Link> - ALPHA {' '}
-            {new Date().getFullYear()}
-            {'.'}
-            <br/>Built with 🫶🏼 from France 🇫🇷
-            <br/>SolidJS - Solid Start - SUID - MUI 
-
-        </Typography>
-    );
 }
 
 export default function SignInSide(props: IProps) {
