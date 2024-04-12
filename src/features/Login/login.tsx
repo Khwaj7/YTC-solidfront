@@ -11,7 +11,7 @@ export default (props: IParams) => {
 
     createEffect((e) => {
         props.setApiKey(formApiKey); console.log("api key updated ?", formApiKey());
-        });
+    });
 
     return (
         <SignInSide setFormApiKey={setFormApiKey}></SignInSide>

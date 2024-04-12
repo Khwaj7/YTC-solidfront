@@ -4,18 +4,10 @@ import { mapUserResponseUser } from "./modules/models/mappers/mapUserResponseUse
 import Login from "./features/Login/login";
 import { Home } from "./features/Home/home";
 import { ThemeProvider, createTheme } from "@suid/material";
-
-const fetchUserByApiKey = async (id: string) => (await fetch(`http://localhost:1234/users?apikey=${id}`)).json();
-const getUser = async (id: string) => {
-  if (id.length > 0) {
-    const userResponse = await fetchUserByApiKey(id);
-    return mapUserResponseUser(userResponse);
-  }
-}
+import { useApp } from './useApp';
 
 export default function App() {
-  const [apiKey, setApiKey] = createSignal<string>();
-  const [user] = createResource(apiKey, getUser);
+  const { setApiKey, user } = useApp();
   const defaultTheme = createTheme();
 
   return (
