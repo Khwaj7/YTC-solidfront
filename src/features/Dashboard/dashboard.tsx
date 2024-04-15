@@ -18,7 +18,6 @@ import { For, Resource, createSignal } from 'solid-js';
 import { IUser } from '../../modules/models/IUser';
 import { IComment } from '../../modules/models/IComment';
 import { Button, ButtonGroup, Chip, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@suid/material';
-import { Chart1 } from './AtAGlance/chart1';
 import { Copyright } from '../../components/Copyright/copyright';
 import { AppBar } from '../../components/AppBar/appBar';
 import { Drawer } from '../../components/Drawer/drawer';
@@ -115,7 +114,7 @@ export default function Dashboard(props: IParams) {
             <Grid container spacing={3}>
               <AtAGlance />
 
-              <RecentVideos />
+              <RecentVideos userId={props.user().id} />
               {/* Recent Orders */}
               <Grid item xs={12}>
                 <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column' }}>

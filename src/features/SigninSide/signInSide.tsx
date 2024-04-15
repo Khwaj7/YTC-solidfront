@@ -10,7 +10,6 @@ import Box from '@suid/material/Box';
 import Grid from '@suid/material/Grid';
 import LockOutlinedIcon from '@suid/icons-material/LockOutlined';
 import Typography from '@suid/material/Typography';
-import { createTheme, ThemeProvider } from '@suid/material/styles';
 import { Setter } from 'solid-js';
 import { Copyright } from '../../components/Copyright/copyright';
 

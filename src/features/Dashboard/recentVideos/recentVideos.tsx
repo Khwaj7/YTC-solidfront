@@ -1,7 +1,15 @@
 import Grid from "@suid/material/Grid/Grid";
 import Paper from "@suid/material/Paper/Paper";
+import { useRecentVideos } from "./useRecentVideos";
 
-export default function RecentVideos() {
+interface IProps {
+    userId: number;
+}
+export default function RecentVideos(props: IProps) {
+    const { videos } = useRecentVideos({ userId: props.userId });
+
+    //console.log("videos", videos());
+
     return (
         <Grid item xs={12} md={4} lg={3}>
             <Paper
