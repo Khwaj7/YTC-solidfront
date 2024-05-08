@@ -4,12 +4,11 @@ import { Chart1 } from "./chart1";
 
 export default function AtAGlance (props: any) {
     return (
-        <Grid item xs={12} md={2} lg={9}>
+        <Grid item xs={12} md={2} lg={7}>
             <Paper
                 sx={{
                     p: 2,
                     display: 'flex',
-                    width: '100%',
                     flexDirection: 'column',
                     alignItems: 'center',
                     height: 450

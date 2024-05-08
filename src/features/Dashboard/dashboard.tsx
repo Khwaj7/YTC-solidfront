@@ -112,13 +112,14 @@ export default function Dashboard(props: IParams) {
           Welcome back, {props.user().name}
           <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
             <Grid container spacing={3}>
+              {/* TODO: pass the videos stats */}
               <AtAGlance />
 
               <RecentVideos userId={props.user().id} />
-              {/* Recent Orders */}
+              
               <Grid item xs={12}>
                 <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column' }}>
-                  <span>Latest comments to answer</span>
+                  <span>Latest video comments</span>
                   <TableContainer component={Paper}>
                     <Table sx={{ minWidth: 650 }} size="small" aria-label="a dense table">
                       <TableHead>
