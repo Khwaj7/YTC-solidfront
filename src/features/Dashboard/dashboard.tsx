@@ -126,7 +126,7 @@ export default function Dashboard(props: IParams) {
                         <TableRow>
                           <TableCell>Author</TableCell>
                           <TableCell>Date</TableCell>
-                          <TableCell>IA check</TableCell>
+                          <TableCell>AI check</TableCell>
                           <TableCell>Comment</TableCell>
                           <TableCell></TableCell>
                         </TableRow>
@@ -143,7 +143,7 @@ export default function Dashboard(props: IParams) {
                                 <ButtonGroup orientation='vertical' variant="outlined" size='small'>
                                   <Button color='success'>Answer</Button>
                                   <Button color='error'>Delete</Button>
-                                  <Button color='warning'>Flag IA error</Button>
+                                  <Button color='warning'>Flag AI error</Button>
                                 </ButtonGroup>
                               </TableCell>
                             </TableRow>
