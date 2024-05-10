@@ -31,6 +31,6 @@ export function Chart1() {
 
     ]);
 
-    return <SolidApexCharts width="500" type="bar" stacked="true"
+    return <SolidApexCharts width="550" type="bar" stacked="true"
         options={{ ...options(), plotOptions: { bar: { horizontal: true } }, chart: { stacked: true, stackType: "100%" } }} series={series()} />;
 }

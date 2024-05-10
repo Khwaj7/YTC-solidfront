@@ -10,9 +10,9 @@ export default function AtAGlance (props: any) {
                     p: 2,
                     display: 'flex',
                     flexDirection: 'column',
-                    alignItems: 'center',
-                    height: 450
+                    alignItems: 'center'
                 }}
+                style={{ height: "30em" }}
             >
                 <span>At A Glance</span>
                 <h3>Your latest videos</h3>
