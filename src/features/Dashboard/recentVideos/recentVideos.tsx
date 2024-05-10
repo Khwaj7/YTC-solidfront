@@ -27,7 +27,7 @@ export default function RecentVideos(props: IProps) {
                     flexDirection: 'column',
                     height: 240,
                 }}
-                style={{ height: "auto" }}
+                style={{ height: "30em" }}
             >
                 <span>Recent Videos</span>
                 <VideoCard video={videoData} />
