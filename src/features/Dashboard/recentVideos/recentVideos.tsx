@@ -4,6 +4,7 @@ import { useRecentVideos } from "./useRecentVideos";
 import VideoCard from "../../Video/components/videoCard";
 import { createResource, createSignal, For, Show } from "solid-js";
 import { IChannel } from "../../../modules/models/IChannel";
+import { CircularProgress, Stack } from "@suid/material";
 
 interface IProps {
   userId: number;
@@ -41,7 +42,9 @@ export default function RecentVideos(props: IProps) {
       >
         <span>Recent Videos</span>
         <Show when={videos.loading}>
-          <p>Loading...</p>
+          <Stack sx={{ color: "grey.500" }} spacing={2} direction="row" flex="auto" alignItems="center" justifyContent="center">
+            <CircularProgress color="info" />
+          </Stack>
         </Show>
         <Show when={videos()}>
           <For each={videos()}>{(item, index) =>
