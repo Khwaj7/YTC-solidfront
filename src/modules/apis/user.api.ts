@@ -1,2 +1,2 @@
-export const fetchUserByApiKey = async (id: string) =>
-(await fetch(`http://localhost:1234/users?apikey=${id}`)).json();
+export const fetchUserByApiKey = async (apiKey: string) =>
+(await fetch(`http://localhost:1234/users?apikey=${apiKey}`)).json();

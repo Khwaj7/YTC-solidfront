@@ -1,4 +1,3 @@
-import { createResource, createSignal } from "solid-js";
 import { fetchVideosByChannelId } from "../../../modules/apis/video.api";
 import { fetchChannelsByUserId } from "../../../modules/apis/channel.api";
 
@@ -7,28 +6,31 @@ interface IProps {
 }
 
 export const useRecentVideos = (props: IProps) => {
-  console.log("userId", props.userId);
+  console.log("props", props);
   const getChannel = async (id: number) => {
-    if (id > 0) {
-      const channelResponse = await fetchChannelsByUserId(id);
-      return channelResponse;
+    if (id <= 0) {
+      throw { code: 404, message: "id is incorrect" };
     }
-  }
-  
-  getChannel(props.userId);
+    const channelResponse = await fetchChannelsByUserId(id);
+    console.log("channelResponse", channelResponse);
+    return channelResponse;
+  };
 
   const getVideos = async (id: string) => {
-    const channels = getChannel(props.userId);
+    const channels = await getChannel(props.userId);
     console.log("channels", channels);
-    
-    if (id.length > 0) {
-      const videosResponse = await fetchVideosByChannelId(id);
-      return videosResponse;
+
+    if (id.length <= 0) {
+      throw { code: 404, message: "id is incorrect" };
     }
+    const videosResponse = await fetchVideosByChannelId(channels[0].id);
+    console.log("videosResponse", videosResponse);
+    return videosResponse;
   };
   const videos = null;//createResource(channels[0].id, getVideos);
 
   return {
-    videos,
+    getChannel,
+    getVideos
   };
 };
