@@ -2,9 +2,8 @@ import Grid from "@suid/material/Grid/Grid";
 import Paper from "@suid/material/Paper/Paper";
 import { useRecentVideos } from "./useRecentVideos";
 import VideoCard from "../../Video/components/videoCard";
-import { createMemo, createSignal } from "solid-js";
+import { createResource, createSignal, For, Show } from "solid-js";
 import { IChannel } from "../../../modules/models/IChannel";
-import { IVideo } from "../../../modules/models/IVideo";
 
 interface IProps {
   userId: number;
@@ -12,35 +11,25 @@ interface IProps {
 
 export default function RecentVideos(props: IProps) {
   const [channel, setChannel] = createSignal<IChannel>();
-  const [video, setVideo] = createSignal<IVideo>();
   const { getChannel, getVideos } = useRecentVideos({ userId: props.userId });
+
+  const [videos, { refetch }] = createResource(channel, async (currentChannel) => {
+    console.log("currentChannel", currentChannel);
+    if (currentChannel[0]?.id) {
+      const vid = await getVideos(currentChannel[0].id.toString());
+      console.log("vid", vid);
+      return vid;
+    }
+  });
 
   getChannel(props.userId).then(value => {
     setChannel(value);
+    console.log("refetch");
+    refetch();
   });
 
-  const videos = createMemo(async () => {
-      console.log("channel()", channel());
-        if (channel()[0].id) {
-          const vid = await getVideos(channel()[0].id.toString());
-          return setVideo(vid);
-        }
-      }
-    )
-  ;
-
-  console.log("getVideo");
-  console.log(video());
-
-  const videoData = {
-    title: "OSS 117 : Comment est votre second degré ?",
-    thumbnail: "https://i.ytimg.com/vi/H0fURk7ykLI/maxresdefault.jpg",
-    views: "1.7M",
-    likes: "65K"
-  };
-
   return (
-    <Grid item xs={12} md={4} lg={5}>
+    <Grid item xs={12} md={4} lg={4}>
       <Paper
         sx={{
           p: 2,
@@ -51,8 +40,20 @@ export default function RecentVideos(props: IProps) {
         style={{ height: "30em" }}
       >
         <span>Recent Videos</span>
-        <VideoCard video={videoData} />
-        <VideoCard video={videoData} />
+        <Show when={videos.loading}>
+          <p>Loading...</p>
+        </Show>
+        <Show when={videos()}>
+          <For each={videos()}>{(item, index) =>
+            <Show when={index() == 1 || index() == 4}>
+              <VideoCard video={item} />
+            </Show>
+          }
+          </For>
+        </Show>
+        <Show when={videos.error}>
+          <p>Loading failed : {videos.error}</p>
+        </Show>
       </Paper>
     </Grid>
   );

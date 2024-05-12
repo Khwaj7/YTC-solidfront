@@ -4,7 +4,7 @@ import { Chart1 } from "./chart1";
 
 export default function AtAGlance (props: any) {
     return (
-        <Grid item xs={12} md={2} lg={7}>
+        <Grid item xs={12} md={2} lg={8}>
             <Paper
                 sx={{
                     p: 2,

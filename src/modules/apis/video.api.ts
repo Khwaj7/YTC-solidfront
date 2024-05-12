@@ -1,6 +1,6 @@
 import { IVideo } from "../models/IVideo";
 
-export const fetchVideosByChannelId = async (channelId: string): Promise<IVideo> => {
+export const fetchVideosByChannelId = async (channelId: string): Promise<IVideo[]> => {
   try {
     const response = await fetch(`http://localhost:1234/videos?channelId=${channelId}`, {
       method: "GET",
@@ -13,7 +13,7 @@ export const fetchVideosByChannelId = async (channelId: string): Promise<IVideo>
       throw new Error(`HTTP error! status: ${response.status}`);
     }
 
-    const data: IVideo = await response.json();
+    const data: IVideo[] = await response.json();
     console.log(data);
     return data;  // Return the data conforming to the IChannel interface
   } catch (error) {

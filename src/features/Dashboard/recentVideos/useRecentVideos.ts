@@ -1,5 +1,6 @@
 import { fetchVideosByChannelId } from "../../../modules/apis/video.api";
 import { fetchChannelsByUserId } from "../../../modules/apis/channel.api";
+import { IVideo } from "../../../modules/models/IVideo";
 
 interface IProps {
   userId: number;
@@ -16,7 +17,7 @@ export const useRecentVideos = (props: IProps) => {
     return channelResponse;
   };
 
-  const getVideos = async (id: string) => {
+  const getVideos = async (id: string): Promise<IVideo[]> => {
     const channels = await getChannel(props.userId);
     console.log("channels", channels);
 
@@ -27,7 +28,6 @@ export const useRecentVideos = (props: IProps) => {
     console.log("videosResponse", videosResponse);
     return videosResponse;
   };
-  const videos = null;//createResource(channels[0].id, getVideos);
 
   return {
     getChannel,

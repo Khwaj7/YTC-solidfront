@@ -5,14 +5,16 @@ import Typography from "@suid/material/Typography";
 import IconButton from "@suid/material/IconButton";
 import VisibilityIcon from '@suid/icons-material/Visibility';
 import ThumbUpIcon from '@suid/icons-material/ThumbUp';
+import globegoldenhour from '/assets/globegoldenhour.jpg';
 
 function VideoCard({ video }) {
+  console.log(video);
   return (
     <Card style={{height: "auto", "margin-top": "0.5rem"}}>
       <CardMedia
         component="img"
         height="100"
-        image={video.thumbnail}
+        image={`https://i.ytimg.com/vi/${video.id}/maxresdefault.jpg`}
         alt="Video thumbnail"
       />
       <CardContent>
@@ -23,13 +25,13 @@ function VideoCard({ video }) {
           <IconButton aria-label="views">
             <VisibilityIcon />
             <Typography variant="body2" component="span">
-              {video.views}
+              150k
             </Typography>
           </IconButton>
           <IconButton aria-label="likes">
             <ThumbUpIcon />
             <Typography variant="body2" component="span">
-              {video.likes}
+              150k
             </Typography>
           </IconButton>
         </div>
