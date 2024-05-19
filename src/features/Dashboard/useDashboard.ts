@@ -1,13 +1,12 @@
-import { fetchVideosByChannelId } from "../../../modules/apis/video.api";
-import { fetchChannelsByUserId } from "../../../modules/apis/channel.api";
-import { IVideo } from "../../../modules/models/IVideo";
+import { IVideo } from "../../modules/models/IVideo";
+import { fetchVideosByChannelId } from "../../modules/apis/video.api";
+import { fetchChannelsByUserId } from "../../modules/apis/channel.api";
 
-interface IProps {
+interface IParams {
   userId: number;
 }
 
-export const useRecentVideos = (props: IProps) => {
-  console.log("props", props);
+export const useDashboard = (props: IParams) => {
   const getChannel = async (id: number) => {
     if (id <= 0) {
       throw { code: 404, message: "id is incorrect" };
@@ -30,7 +29,6 @@ export const useRecentVideos = (props: IProps) => {
   };
 
   return {
-    getChannel,
-    getVideos
+    getChannel, getVideos
   };
 };

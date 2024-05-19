@@ -13,7 +13,7 @@ import Paper from "@suid/material/Paper";
 import MenuIcon from "@suid/icons-material/Menu";
 import NotificationsIcon from "@suid/icons-material/Notifications";
 import { mainListItems } from "./listItems";
-import { createSignal, For, Resource } from "solid-js";
+import { createResource, createSignal, For, Resource } from "solid-js";
 import { IUser } from "../../modules/models/IUser";
 import { IComment } from "../../modules/models/IComment";
 import {
@@ -31,6 +31,8 @@ import { Copyright } from "../../components/Copyright/copyright";
 import { AppBar } from "../../components/AppBar/appBar";
 import AtAGlance from "./AtAGlance/atAGlance";
 import RecentVideos from "./recentVideos/recentVideos";
+import { IChannel } from "../../modules/models/IChannel";
+import { useDashboard } from "./useDashboard";
 
 interface IParams {
   user: Resource<IUser>;
@@ -42,6 +44,23 @@ const drawerWidth: number = 240;
 
 export default function Dashboard(props: IParams) {
   const [open, setOpen] = createSignal(true);
+  const [channel, setChannel] = createSignal<IChannel>();
+  const { getChannel, getVideos } = useDashboard({ userId: props.user().id });
+
+  getChannel(props.user().id).then(value => {
+    setChannel(value);
+    console.log("refetch");
+    refetch();
+  });
+
+  const [videos, { refetch }] = createResource(channel, async (currentChannel) => {
+    if (currentChannel[0]?.id) {
+      const vids = await getVideos(currentChannel[0].id.toString());
+      console.log("vids", vids);
+      return vids;
+    }
+  });
+
   console.log("user", props.user());
   const toggleDrawer = () => {
     setOpen(!open);
@@ -108,7 +127,7 @@ export default function Dashboard(props: IParams) {
               {/* TODO: pass the videos stats */}
               <AtAGlance />
 
-              <RecentVideos userId={props.user().id} />
+              <RecentVideos userId={props.user().id} videos={videos} />
 
               <Grid item xs={12}>
                 <Paper sx={{ p: 2, display: "flex", flexDirection: "column" }}>
