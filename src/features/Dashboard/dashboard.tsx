@@ -13,13 +13,15 @@ import Paper from "@suid/material/Paper";
 import MenuIcon from "@suid/icons-material/Menu";
 import NotificationsIcon from "@suid/icons-material/Notifications";
 import { mainListItems } from "./listItems";
-import { createResource, createSignal, For, Resource } from "solid-js";
+import { createResource, createSignal, For, Resource, Show } from "solid-js";
 import { IUser } from "../../modules/models/IUser";
 import { IComment } from "../../modules/models/IComment";
 import {
   Button,
   ButtonGroup,
   Chip,
+  CircularProgress,
+  Stack,
   Table,
   TableBody,
   TableCell,
@@ -61,7 +63,6 @@ export default function Dashboard(props: IParams) {
     }
   });
 
-  console.log("user", props.user());
   const toggleDrawer = () => {
     setOpen(!open);
   };
@@ -125,7 +126,19 @@ export default function Dashboard(props: IParams) {
           <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
             <Grid container spacing={3}>
               {/* TODO: pass the videos stats */}
-              <AtAGlance />
+              <Show when={videos.loading}>
+                <Stack sx={{ color: "grey.500" }}
+                       spacing={2}
+                       direction="row"
+                       flex="auto"
+                       alignItems="center"
+                       justifyContent="center">
+                  <CircularProgress color="info" />
+                </Stack>
+              </Show>
+              <Show when={videos()}>
+                <AtAGlance videos={videos} />
+              </Show>
 
               <RecentVideos userId={props.user().id} videos={videos} />
 

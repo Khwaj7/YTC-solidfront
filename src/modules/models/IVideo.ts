@@ -1,5 +1,5 @@
 export interface IVideo {
-  id: number;
+  id: string;
   title: string;
   thumbnail: string;
   views: number;
