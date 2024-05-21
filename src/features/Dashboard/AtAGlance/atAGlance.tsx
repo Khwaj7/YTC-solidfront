@@ -1,24 +1,24 @@
 import Grid from "@suid/material/Grid/Grid";
 import Paper from "@suid/material/Paper/Paper";
-import { createSignal, Resource } from "solid-js";
+import { createEffect, createSignal, Resource, Show } from "solid-js";
 import { SolidApexCharts } from "solid-apexcharts";
 import { IVideo } from "../../../modules/models/IVideo";
 import { useAtAGlance } from "./useAtAGlance";
 import { IStat } from "../../../modules/models/IStat";
+import { CircularProgress, Stack } from "@suid/material";
 
 interface IParams {
   videos: Resource<IVideo[]>;
 }
 
 export default function AtAGlance(props: IParams) {
-  const { getStatsByVideoId } = useAtAGlance();
+  const { getStatsByVideoId, getStatsByVideos } = useAtAGlance();
   const [stats, setStats] = createSignal<IStat[]>();
+  const [series, setSeries] = createSignal([]);
 
-  getStatsByVideoId(props.videos()[0].id).then(value => {
-    setStats([value]);
-    console.log("stats added", stats());
+  getStatsByVideos(props.videos()).then(videoStats => {
+    setStats(videoStats);
   });
-
   // create categories (ordonnees)
   let categories: string[] = [];
   props.videos().forEach((vid, index) => {
@@ -31,34 +31,33 @@ export default function AtAGlance(props: IParams) {
       categories: categories
     }
   });
-  // TODO
-  // data table stats[videoId][stat1, stat2, stat3, stat4, stat5] ?
-  // to dynamically complete following series object
 
-  console.log("stats()[0].totalUnwanted", stats());
-  const [series] = createSignal([
-    {
-      name: "unwanted",
-      data: [stats()[0].totalUnwanted, 40, 35, 50, 49]
-    },
-    {
-      name: "question",
-      data: [23, 12, 54, 61, 32]
-    },
-    {
-      name: "feedback",
-      data: [23, 12, 54, 61, 32]
-    },
-    {
-      name: "idea",
-      data: [62, 12, 45, 55, 76]
-    },
-    {
-      name: "collaboration",
-      data: [62, 12, 45, 55, 76]
+  createEffect(() => {
+    if (stats() != undefined) {
+      setSeries([
+        {
+          name: "unwanted",
+          data: [stats()[0].totalUnwanted, 40, 35, 50, 49]
+        },
+        {
+          name: "question",
+          data: [stats()[0].totalQuestion, 12, 54, 61, 32]
+        },
+        {
+          name: "feedback",
+          data: [stats()[0].totalFeedback, 12, 54, 61, 32]
+        },
+        {
+          name: "idea",
+          data: [stats()[0].totalIdea, 12, 45, 55, 76]
+        },
+        {
+          name: "collaboration",
+          data: [stats()[0].totalCollaboration, 12, 45, 55, 76]
+        }
+      ]);
     }
-
-  ]);
+  });
 
   return (
     <Grid item xs={12} md={2} lg={8}>
@@ -73,11 +72,19 @@ export default function AtAGlance(props: IParams) {
       >
         <span>At A Glance</span>
         <h3>Your latest videos</h3>
-        <SolidApexCharts width="550" type="bar" stacked="true" options={{
-          ...options(),
-          plotOptions: { bar: { horizontal: true } },
-          chart: { stacked: true, stackType: "100%" }
-        }} series={series()} />
+        <Show when={stats() == undefined}>
+          <Stack sx={{ color: "grey.500" }} spacing={2} direction="row" flex="auto" alignItems="center"
+                 justifyContent="center">
+            <CircularProgress color="info" />
+          </Stack>
+        </Show>
+        <Show when={stats()}>
+          <SolidApexCharts width="550" type="bar" stacked="true" options={{
+            ...options(),
+            plotOptions: { bar: { horizontal: true } },
+            chart: { stacked: true, stackType: "100%" }
+          }} series={series()} />
+        </Show>
       </Paper>
     </Grid>
   );

@@ -51,14 +51,12 @@ export default function Dashboard(props: IParams) {
 
   getChannel(props.user().id).then(value => {
     setChannel(value);
-    console.log("refetch");
     refetch();
   });
 
   const [videos, { refetch }] = createResource(channel, async (currentChannel) => {
     if (currentChannel[0]?.id) {
       const vids = await getVideos(currentChannel[0].id.toString());
-      console.log("vids", vids);
       return vids;
     }
   });

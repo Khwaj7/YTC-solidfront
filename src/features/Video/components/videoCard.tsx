@@ -8,7 +8,6 @@ import ThumbUpIcon from '@suid/icons-material/ThumbUp';
 import globegoldenhour from '/assets/globegoldenhour.jpg';
 
 function VideoCard({ video }) {
-  console.log(video);
   return (
     <Card style={{height: "auto", "margin-top": "0.5rem"}}>
       <CardMedia

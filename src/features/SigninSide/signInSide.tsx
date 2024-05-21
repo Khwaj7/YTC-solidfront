@@ -21,9 +21,6 @@ export default function SignInSide(props: IProps) {
     const handleSubmit = (event: HTMLFormElement) => {
         event.preventDefault();
         const data = new FormData(event.currentTarget);
-        console.log({
-            apikey: data.get('apikey'),
-        });
         props.setFormApiKey(data.get('apikey') as string);
     };
 

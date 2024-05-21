@@ -14,7 +14,6 @@ export const fetchVideosByChannelId = async (channelId: string): Promise<IVideo[
     }
 
     const data: IVideo[] = await response.json();
-    console.log(data);
     return data;  // Return the data conforming to the IChannel interface
   } catch (error) {
     console.error("Error:", error);

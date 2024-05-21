@@ -10,7 +10,7 @@ export default (props: IParams) => {
     const [formApiKey, setFormApiKey] = createSignal<string>('');
 
     createEffect((e) => {
-        props.setApiKey(formApiKey); console.log("api key updated ?", formApiKey());
+        props.setApiKey(formApiKey);
     });
 
     return (

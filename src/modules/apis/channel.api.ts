@@ -14,7 +14,6 @@ export const fetchChannelsByUserId = async (userId: number): Promise<IChannel> =
     }
 
     const data: IChannel = await response.json();
-    console.log(data);
     return data;  // Return the data conforming to the IChannel interface
   } catch (error) {
     console.error("Error:", error);
