@@ -33,27 +33,29 @@ export default function AtAGlance(props: IParams) {
   });
 
   createEffect(() => {
+    console.log("videos", props.videos());
+    console.log("stats", stats());
     if (stats() != undefined) {
       setSeries([
         {
           name: "unwanted",
-          data: [stats()[0].totalUnwanted, 40, 35, 50, 49]
+          data: [stats()[0].totalUnwanted, stats()[1].totalUnwanted, stats()[2].totalUnwanted, stats()[3].totalUnwanted, stats()[4].totalUnwanted]
         },
         {
           name: "question",
-          data: [stats()[0].totalQuestion, 12, 54, 61, 32]
+          data: [stats()[0].totalQuestion, stats()[1].totalQuestion, stats()[2].totalQuestion, stats()[3].totalQuestion, stats()[4].totalQuestion]
         },
         {
           name: "feedback",
-          data: [stats()[0].totalFeedback, 12, 54, 61, 32]
+          data: [stats()[0].totalFeedback, stats()[1].totalFeedback, stats()[2].totalFeedback, stats()[3].totalFeedback, stats()[4].totalFeedback]
         },
         {
           name: "idea",
-          data: [stats()[0].totalIdea, 12, 45, 55, 76]
+          data: [stats()[0].totalIdea, stats()[1].totalIdea, stats()[2].totalIdea, stats()[3].totalIdea, stats()[4].totalIdea]
         },
         {
           name: "collaboration",
-          data: [stats()[0].totalCollaboration, 12, 45, 55, 76]
+          data: [stats()[0].totalCollaboration, stats()[1].totalCollaboration, stats()[2].totalCollaboration, stats()[3].totalCollaboration, stats()[4].totalCollaboration]
         }
       ]);
     }
