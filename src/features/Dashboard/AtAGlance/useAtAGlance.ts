@@ -2,12 +2,12 @@ import { fetchStatsByVideoId } from "../../../modules/apis/stat.api";
 import { IVideo } from "../../../modules/models/IVideo";
 import { IStat } from "../../../modules/models/IStat";
 
-export const useAtAGlance = () => {
+export const useAtAGlance = (apiKey: string) => {
   const getStatsByVideoId = async (videoId: string) => {
     if (videoId.length <= 0) {
       throw { code: 404, message: "id is incorrect" };
     }
-    return await fetchStatsByVideoId(videoId);
+    return await fetchStatsByVideoId(videoId, apiKey);
   };
 
   const getStatsByVideos = async (videos: IVideo[]) => {

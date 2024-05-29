@@ -16,5 +16,6 @@ export const useApp = () => {
   return {
     setApiKey,
     user,
+    apiKey,
   };
 };

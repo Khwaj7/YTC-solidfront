@@ -9,10 +9,11 @@ import { CircularProgress, Stack } from "@suid/material";
 
 interface IParams {
   videos: Resource<IVideo[]>;
+  apiKey: string;
 }
 
 export default function AtAGlance(props: IParams) {
-  const { getStatsByVideoId, getStatsByVideos } = useAtAGlance();
+  const { getStatsByVideoId, getStatsByVideos } = useAtAGlance(props.apiKey);
   const [stats, setStats] = createSignal<IStat[]>();
   const [series, setSeries] = createSignal([]);
 

@@ -1,11 +1,11 @@
 import { IChannel } from "../models/IChannel";
 
-export const fetchChannelsByUserId = async (userId: number): Promise<IChannel> => {
+export const fetchChannelsByUserId = async (userId: number, apiKey: string): Promise<IChannel> => {
   try {
     const response = await fetch(`http://localhost:1234/channels?userId=${userId}`, {
       method: "GET",
       headers: {
-        "api-key": "QDuebCUy0G5U-oNCJX9lSTXbnxncDENUP66gY0_r7Le3lw4lW-9Y5n_vxQxNxWE8"
+        "api-key": apiKey
       }
     });
 

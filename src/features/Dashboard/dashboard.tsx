@@ -38,16 +38,16 @@ import { useDashboard } from "./useDashboard";
 
 interface IParams {
   user: Resource<IUser>;
+  apiKey: string;
 }
 
 // TODO remove, this demo shouldn't need to reset the theme.
 const defaultTheme = createTheme();
-const drawerWidth: number = 240;
 
 export default function Dashboard(props: IParams) {
   const [open, setOpen] = createSignal(true);
   const [channel, setChannel] = createSignal<IChannel>();
-  const { getChannel, getVideos } = useDashboard({ userId: props.user().id });
+  const { getChannel, getVideos } = useDashboard({ userId: props.user().id, apiKey: props.apiKey });
 
   getChannel(props.user().id).then(value => {
     setChannel(value);
@@ -135,7 +135,7 @@ export default function Dashboard(props: IParams) {
                 </Stack>
               </Show>
               <Show when={videos()}>
-                <AtAGlance videos={videos} />
+                <AtAGlance videos={videos} apiKey={props.apiKey} />
               </Show>
 
               <RecentVideos userId={props.user().id} videos={videos} />

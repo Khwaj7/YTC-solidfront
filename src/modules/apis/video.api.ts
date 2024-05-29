@@ -1,11 +1,11 @@
 import { IVideo } from "../models/IVideo";
 
-export const fetchVideosByChannelId = async (channelId: string): Promise<IVideo[]> => {
+export const fetchVideosByChannelId = async (channelId: string, apiKey: string): Promise<IVideo[]> => {
   try {
     const response = await fetch(`http://localhost:1234/videos?channelId=${channelId}`, {
       method: "GET",
       headers: {
-        "api-key": "QDuebCUy0G5U-oNCJX9lSTXbnxncDENUP66gY0_r7Le3lw4lW-9Y5n_vxQxNxWE8"
+        "api-key": apiKey
       }
     });
 

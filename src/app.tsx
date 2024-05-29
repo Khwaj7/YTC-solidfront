@@ -7,7 +7,7 @@ import { ThemeProvider, createTheme } from "@suid/material";
 import { useApp } from './useApp';
 
 export default function App() {
-  const { setApiKey, user } = useApp();
+  const { apiKey, setApiKey, user } = useApp();
   const defaultTheme = createTheme();
 
   return (
@@ -21,7 +21,7 @@ export default function App() {
         </Match>
         <Match when={user()}>
           <div>user: {JSON.stringify(user())}</div>
-          <Home user={user}></Home>
+          <Home user={user} apiKey={apiKey()}></Home>
         </Match>
       </Switch>
     </ThemeProvider>

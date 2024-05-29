@@ -4,10 +4,11 @@ import Dashboard from "../Dashboard/dashboard";
 
 interface IParams {
     user: Resource<IUser>;
+    apiKey: string;
 }
 
 export const Home = (props: IParams) => {
     return (
-        <Dashboard user={props.user}></Dashboard>
+        <Dashboard user={props.user} apiKey={props.apiKey}></Dashboard>
     );
 }

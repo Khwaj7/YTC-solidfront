@@ -2,8 +2,10 @@ import { IVideo } from "../../modules/models/IVideo";
 import { fetchVideosByChannelId } from "../../modules/apis/video.api";
 import { fetchChannelsByUserId } from "../../modules/apis/channel.api";
 
+// TODO: Better apiKey sending method
 interface IParams {
   userId: number;
+  apiKey: string;
 }
 
 export const useDashboard = (props: IParams) => {
@@ -11,7 +13,7 @@ export const useDashboard = (props: IParams) => {
     if (id <= 0) {
       throw { code: 404, message: "id is incorrect" };
     }
-    const channelResponse = await fetchChannelsByUserId(id);
+    const channelResponse = await fetchChannelsByUserId(id, props.apiKey);
     return channelResponse;
   };
 
@@ -21,7 +23,7 @@ export const useDashboard = (props: IParams) => {
     if (id.length <= 0) {
       throw { code: 404, message: "id is incorrect" };
     }
-    const videosResponse = await fetchVideosByChannelId(channels[0].id);
+    const videosResponse = await fetchVideosByChannelId(channels[0].id, props.apiKey);
     return videosResponse;
   };
 
