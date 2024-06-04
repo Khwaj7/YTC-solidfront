@@ -31,7 +31,7 @@ export default function RecentVideos(props: IProps) {
         </Show>
         <Show when={props.videos()}>
           <For each={props.videos()}>{(item, index) =>
-            <Show when={index() == 1 || index() == 4}>
+            <Show when={index() == 0 || index() == 1}>
               <VideoCard video={item} />
             </Show>
           }
