@@ -13,8 +13,7 @@ export const useDashboard = (props: IParams) => {
     if (id <= 0) {
       throw { code: 404, message: "id is incorrect" };
     }
-    const channelResponse = await fetchChannelsByUserId(id, props.apiKey);
-    return channelResponse;
+    return await fetchChannelsByUserId(id, props.apiKey);
   };
 
   const getVideos = async (id: string): Promise<IVideo[]> => {
@@ -23,8 +22,7 @@ export const useDashboard = (props: IParams) => {
     if (id.length <= 0) {
       throw { code: 404, message: "id is incorrect" };
     }
-    const videosResponse = await fetchVideosByChannelId(channels[0].id, props.apiKey);
-    return videosResponse;
+    return await fetchVideosByChannelId(channels[0].id, props.apiKey);
   };
 
   return {
