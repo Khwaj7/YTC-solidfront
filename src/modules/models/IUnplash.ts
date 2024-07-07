@@ -3,4 +3,7 @@ export interface IUnplash {
     {
       download: string;
     };
+  urls: {
+    regular: string;
+  }
 }

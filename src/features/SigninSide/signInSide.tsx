@@ -1,18 +1,15 @@
 import Avatar from "@suid/material/Avatar";
-import Button from "@suid/material/Button";
 import CssBaseline from "@suid/material/CssBaseline";
-import TextField from "@suid/material/TextField";
-import FormControlLabel from "@suid/material/FormControlLabel";
-import Checkbox from "@suid/material/Checkbox";
-import Link from "@suid/material/Link";
 import Paper from "@suid/material/Paper";
 import Box from "@suid/material/Box";
 import Grid from "@suid/material/Grid";
 import LockOutlinedIcon from "@suid/icons-material/LockOutlined";
-import Typography from "@suid/material/Typography";
-import { createSignal, Setter } from "solid-js";
+import { createSignal, Match, Setter, Switch } from "solid-js";
 import { Copyright } from "../../components/Copyright/copyright";
 import { useSignInSide } from "./useSignInSide";
+import LoginForm from "./loginForm";
+import signUpForm from "./signUpForm";
+import SignUpForm from "./signUpForm";
 
 interface IProps {
   setFormApiKey: Setter<string>;
@@ -20,14 +17,9 @@ interface IProps {
 
 export default function SignInSide(props: IProps) {
   const [background, setBackground] = createSignal<string>("");
+  const [signUp, setSignUp] = createSignal<Boolean>(false);
   const { getRandomImage } = useSignInSide({ unsplashApiKey: "55VVozkFgVV5_E9HUS3BCICzuE4pks7-xFbeoi3Zobo" });
-  getRandomImage().then(value => setBackground(value.links.download));
-
-  const handleSubmit = (event: HTMLFormElement) => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    props.setFormApiKey(data.get("apikey") as string);
-  };
+  getRandomImage().then(value => setBackground(value.urls.regular));
 
   return (
     <Grid container component="main" sx={{ height: "100vh" }}>
@@ -59,45 +51,15 @@ export default function SignInSide(props: IProps) {
           <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
             <LockOutlinedIcon />
           </Avatar>
-          <Typography component="h1" variant="h5">
-            Sign in
-          </Typography>
-          <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 1 }}>
-            <TextField
-              margin="normal"
-              required
-              fullWidth
-              id="apikey"
-              label="Your API Key"
-              name="apikey"
-              autoFocus
-            />
-            <FormControlLabel
-              control={<Checkbox value="remember" color="primary" />}
-              label="Remember me"
-            />
-            <Button
-              type="submit"
-              fullWidth
-              variant="contained"
-              sx={{ mt: 3, mb: 2 }}
-            >
-              Sign In
-            </Button>
-            <Grid container>
-              <Grid item xs>
-                <Link href="#" variant="body2">
-                  Forgot your API key?
-                </Link>
-              </Grid>
-              <Grid item>
-                <Link href="#" variant="body2">
-                  {"Don't have an account? Sign Up"}
-                </Link>
-              </Grid>
-            </Grid>
-            <Copyright sx={{ mt: 5 }} />
-          </Box>
+          <Switch>
+            <Match when={signUp()}>
+              <SignUpForm setSignUp={setSignUp}></SignUpForm>
+            </Match>
+            <Match when={!signUp()}>
+              <LoginForm setSignUp={setSignUp} setFormApiKey={props.setFormApiKey} />
+            </Match>
+          </Switch>
+          <Copyright sx={{ mt: 5 }} />
         </Box>
       </Grid>
     </Grid>

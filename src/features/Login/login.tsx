@@ -9,7 +9,7 @@ interface IParams {
 export default (props: IParams) => {
     const [formApiKey, setFormApiKey] = createSignal<string>('');
 
-    createEffect((e) => {
+    createEffect(() => {
         props.setApiKey(formApiKey);
     });
 
