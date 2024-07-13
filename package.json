@@ -11,7 +11,7 @@
     "@suid/material": "*",
     "apexcharts": "^3.48.0",
     "solid-apexcharts": "^0.3.4",
-    "solid-js": "*"
+    "solid-js": "^1.8.17"
   },
   "devDependencies": {
     "@suid/vite-plugin": "*",
