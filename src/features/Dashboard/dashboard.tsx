@@ -32,7 +32,7 @@ import {
 import { Copyright } from "../../components/Copyright/copyright";
 import { AppBar } from "../../components/AppBar/appBar";
 import AtAGlance from "./AtAGlance/atAGlance";
-import RecentVideos from "./recentVideos/recentVideos";
+import RecentVideos from "./RecentVideos/recentVideos";
 import { IChannel } from "../../modules/models/IChannel";
 import { useDashboard } from "./useDashboard";
 
