@@ -1,6 +1,6 @@
 import Grid from "@suid/material/Grid/Grid";
 import Paper from "@suid/material/Paper/Paper";
-import VideoCard from "../../Video/components/videoCard";
+import VideoCard from "./components/videoCard";
 import { For, Resource, Show } from "solid-js";
 import { CircularProgress, Stack } from "@suid/material";
 import { IVideo } from "../../../modules/models/IVideo";
