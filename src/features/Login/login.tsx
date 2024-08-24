@@ -1,19 +1,18 @@
 import { createEffect, createSignal, Setter } from "solid-js";
-import { Button, TextField } from "@suid/material";
 import SignInSide from "../SigninSide/signInSide";
 
 interface IParams {
-    setApiKey: Setter<string | undefined>;
+  setApiKey: Setter<string | undefined>;
 }
 
 export default (props: IParams) => {
-    const [formApiKey, setFormApiKey] = createSignal<string>('');
+  const [formApiKey, setFormApiKey] = createSignal<string>("");
 
-    createEffect(() => {
-        props.setApiKey(formApiKey);
-    });
+  createEffect(() => {
+    props.setApiKey(formApiKey);
+  });
 
-    return (
-        <SignInSide setFormApiKey={setFormApiKey}></SignInSide>
-    )
+  return (
+    <SignInSide setFormApiKey={setFormApiKey}></SignInSide>
+  );
 }

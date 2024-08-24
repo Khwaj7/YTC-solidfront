@@ -4,12 +4,12 @@ import Paper from "@suid/material/Paper";
 import Box from "@suid/material/Box";
 import Grid from "@suid/material/Grid";
 import LockOutlinedIcon from "@suid/icons-material/LockOutlined";
-import { createSignal, Match, Setter, Switch } from "solid-js";
+import { Accessor, createSignal, Match, Setter, Switch } from "solid-js";
 import { Copyright } from "../../components/Copyright/copyright";
 import { useSignInSide } from "./useSignInSide";
 import LoginForm from "./loginForm";
-import signUpForm from "./signUpForm";
 import SignUpForm from "./signUpForm";
+import { toast, Toaster } from "solid-toast";
 
 interface IProps {
   setFormApiKey: Setter<string>;
@@ -17,7 +17,7 @@ interface IProps {
 
 export default function SignInSide(props: IProps) {
   const [background, setBackground] = createSignal<string>("");
-  const [signUp, setSignUp] = createSignal<Boolean>(false);
+  const [isSignUp, setIsSignUp] = createSignal<boolean>(false);
   const { getRandomImage } = useSignInSide({ unsplashApiKey: "55VVozkFgVV5_E9HUS3BCICzuE4pks7-xFbeoi3Zobo" });
   getRandomImage().then(value => setBackground(value.urls.regular));
 
@@ -52,11 +52,11 @@ export default function SignInSide(props: IProps) {
             <LockOutlinedIcon />
           </Avatar>
           <Switch>
-            <Match when={signUp()}>
-              <SignUpForm setSignUp={setSignUp}></SignUpForm>
+            <Match when={isSignUp()}>
+              <SignUpForm setSignUp={setIsSignUp}></SignUpForm>
             </Match>
-            <Match when={!signUp()}>
-              <LoginForm setSignUp={setSignUp} setFormApiKey={props.setFormApiKey} />
+            <Match when={!isSignUp()}>
+              <LoginForm setSignUp={setIsSignUp} setFormApiKey={props.setFormApiKey} />
             </Match>
           </Switch>
           <Copyright sx={{ mt: 5 }} />

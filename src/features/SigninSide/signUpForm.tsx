@@ -5,15 +5,17 @@ import Button from "@suid/material/Button";
 import Grid from "@suid/material/Grid";
 import Link from "@suid/material/Link";
 import { Setter } from "solid-js";
+import { Toaster } from "solid-toast";
 
 export interface IParams {
-  setSignUp: Setter<Boolean>;
+  setSignUp: Setter<boolean>;
 }
 
 export default function SignUpForm(props: IParams) {
 
   return (
     <>
+      <Toaster/>
       <Typography component="h1" variant="h5">
         Sign Up
       </Typography>
