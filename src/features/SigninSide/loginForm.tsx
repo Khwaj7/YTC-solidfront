@@ -6,11 +6,11 @@ import Checkbox from "@suid/material/Checkbox";
 import Button from "@suid/material/Button";
 import Grid from "@suid/material/Grid";
 import Link from "@suid/material/Link";
-import { Accessor, Setter } from "solid-js";
+import { Setter } from "solid-js";
 
 export interface IParams {
   setFormApiKey: Setter<string>;
-  setSignUp: Setter<Boolean>;
+  setSignUp: Setter<boolean>;
 }
 
 export default function LoginForm(props: IParams) {

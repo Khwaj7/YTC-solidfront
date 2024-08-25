@@ -1,23 +1,29 @@
-import './app.css'
-import { Match, Switch, createEffect, createResource, createSignal } from "solid-js";
-import { mapUserResponseUser } from "./modules/models/mappers/mapUserResponseUser";
+import "./app.css";
+import { createEffect, Match, Switch } from "solid-js";
 import Login from "./features/Login/login";
 import { Home } from "./features/Home/home";
-import { ThemeProvider, createTheme } from "@suid/material";
-import { useApp } from './useApp';
+import { createTheme, ThemeProvider } from "@suid/material";
+import { useApp } from "./useApp";
+import { toast, Toaster } from "solid-toast";
 
 export default function App() {
-  const { apiKey, setApiKey, user } = useApp();
+  const { apiKey, setApiKey, user, error } = useApp();
   const defaultTheme = createTheme();
+
+  createEffect(() => {
+    if (error())
+      toast.error(error());
+  });
 
   return (
     <ThemeProvider theme={defaultTheme}>
       <Switch>
         <Match when={!user()}>
+          <Toaster position="top-right" gutter={8} />
           <Login setApiKey={setApiKey} />
         </Match>
         <Match when={user.error}>
-          <span>Error: {user.error}</span>
+          <Toaster position="top-right" gutter={8} />
         </Match>
         <Match when={user()}>
           <div>user: {JSON.stringify(user())}</div>
